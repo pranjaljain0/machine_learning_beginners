@@ -16,19 +16,19 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 # Load dataset
-url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
-names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
-dataset = read_csv(url, names=names)
+url = "/Users/Pranjal/Documents/python/ml/ml_03/dataset.csv"
+names = ['Fixed acidity','Volatile acidity','Citric acid','Residual sugar','Chlorides','Free sulfur dioxide','Total sulfur dioxide','Density','pH','Sulphates','Alcohol','Quality']
+
+dataset = read_csv(url, names=names,sep=';')
 
 # Split-out validation dataset
 array = dataset.values
-X = array[:,0:4]
-y = array[:,4]
-
+X = array[:,0:12]
+y = array[:,11]
 X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=0.20, random_state=1)
 
 # Make predictions on validation dataset
-model = SVC(gamma='auto')
+model = DecisionTreeClassifier()
 model.fit(X_train, Y_train)
 predictions = model.predict(X_validation)
 
